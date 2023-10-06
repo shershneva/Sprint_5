@@ -1,20 +1,21 @@
 import pytest
 from selenium import webdriver
 from locators import *
+from static_data import *
+
 @pytest.fixture(scope='function')
 def driver():
     driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+    driver.get(url_main)
     yield driver
     driver.quit()
 
 @pytest.fixture
 def signin(driver):
-    def login(url, page):
-        driver.get(url)
-        driver.find_element(*page).click()
-        driver.find_element(*MainPage.NAME_INPUT).send_keys('alaien@yandex.ru')
-        driver.find_element(*MainPage.PASSWORD_INPUT).send_keys('Password1789')
-        driver.find_element(*MainPage.BUTTON_SIGN_IN).click()
+    driver.get(url_main)
+    driver.find_element(*MainPage.ENTER_BUTTON).click()
+    driver.find_element(*AuthPage.NAME_INPUT).send_keys(my_login)
+    driver.find_element(*AuthPage.PASSWORD_INPUT).send_keys(my_password)
+    driver.find_element(*AuthPage.BUTTON_SIGN_IN).click()
 
-    return login
+    return signin

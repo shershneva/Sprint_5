@@ -5,7 +5,7 @@ import pytest
 
 @pytest.mark.parametrize('tab1, tab2', [(MainPage.SAUCES, MainPage.BREAD), (MainPage.FILLING, MainPage.SAUCES), (MainPage.SAUCES, MainPage.FILLING)])
 def test_constructor_current_tab(driver, tab1, tab2):
-    driver.get("https://stellarburgers.nomoreparties.site/")
+    driver.get(url_main)
     WebDriverWait(driver, 5)
     driver.find_element(*tab1).click()
     active_tab = driver.find_element(*tab2)
